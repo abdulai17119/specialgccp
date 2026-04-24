@@ -1,0 +1,366 @@
+/* ============================================================
+   PRESSCRAFT — ATELIER NOIR DESIGN SYSTEM
+   Philosophy: Parisian luxury atelier applied to print.
+   White = premium paper stock
+   Black = the authority of ink
+   Gold (#C9A646) = embossed seal — fine punctuation only
+   Typography: Cormorant Garamond (display) + Jost (body/UI)
+   ============================================================ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* Presscraft custom tokens */
+  --color-gold: #C9A646;
+  --color-gold-light: #DFC07A;
+  --color-gold-dark: #A8882E;
+  --color-ink: #111111;
+  --color-ink-soft: #2A2A2A;
+  --color-paper: #FFFFFF;
+  --color-paper-warm: #FAF9F7;
+  --color-paper-muted: #F4F2EE;
+}
+
+:root {
+  --radius: 0;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0 0);
+  --primary: oklch(0.68 0.09 75);   /* gold */
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.1 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.68 0.09 75);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.88 0 0);
+  --input: oklch(0.88 0 0);
+  --ring: oklch(0.68 0.09 75);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+      max-width: 1440px;
+    }
+  }
+
+  /* Gold hairline rule */
+  .gold-rule {
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background-color: #C9A646;
+  }
+
+  /* Gold CTA button */
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #C9A646;
+    color: #111111;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+  }
+  .btn-gold:hover {
+    background-color: #111111;
+    color: #C9A646;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: #111111;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border: 1px solid #111111;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+  .btn-ghost:hover {
+    background-color: #111111;
+    color: #FFFFFF;
+  }
+
+  /* Section label */
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #C9A646;
+  }
+
+  /* Display heading */
+  .display-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    line-height: 1.05;
+    color: #111111;
+  }
+
+  /* Fade-up animation */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes drawLine {
+    from { width: 0; }
+    to { width: 3rem; }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  /* Scroll-triggered visibility */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Stagger delays */
+  .delay-100 { transition-delay: 0.1s; }
+  .delay-200 { transition-delay: 0.2s; }
+  .delay-300 { transition-delay: 0.3s; }
+  .delay-400 { transition-delay: 0.4s; }
+  .delay-500 { transition-delay: 0.5s; }
+  .delay-600 { transition-delay: 0.6s; }
+
+  @keyframes revealScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 166, 70, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(201, 166, 70, 0); }
+  }
+
+  .pulse-gold {
+    animation: pulse-gold 2s infinite;
+  }
+
+  /* Gold underline hover */
+  .gold-hover-link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+  .gold-hover-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #C9A646;
+    transition: width 0.3s ease;
+  }
+  .gold-hover-link:hover::after {
+    width: 100%;
+  }
+
+  /* Portfolio image hover */
+  .portfolio-item {
+    overflow: hidden;
+    position: relative;
+  }
+  .portfolio-item img {
+    transition: transform 0.6s ease;
+  }
+  .portfolio-item:hover img {
+    transform: scale(1.04);
+  }
+  .portfolio-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0);
+    transition: background 0.4s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+  }
+  .portfolio-item:hover .overlay {
+    background: rgba(17, 17, 17, 0.65);
+  }
+  .portfolio-item .overlay-content {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .portfolio-item:hover .overlay-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gold border card hover */
+  .service-card {
+    border: 1px solid #E8E5E0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #FFFFFF;
+  }
+  .service-card:hover {
+    border-color: #C9A646;
+    box-shadow: 0 8px 40px rgba(201, 166, 70, 0.08);
+  }
+}
